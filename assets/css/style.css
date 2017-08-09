@@ -2,7 +2,12 @@
   text-align: center;
   box-sizing: content-box;
 }
-
+.navigation {
+  margin:0 auto;
+  position:relative;
+  background-color: red;
+  border:1px solid black;
+}
 .main {
   margin:0 auto;
   position:relative;
@@ -11,12 +16,6 @@
   background-color: red;
   border:1px solid black;
   z-index: 0;
-}
-.navigation {
-  margin:0 auto;
-  position:relative;
-  background-color: red;
-  border:1px solid black;
 }
 .search {
   margin:0 auto;
