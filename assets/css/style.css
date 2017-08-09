@@ -3,20 +3,27 @@
   box-sizing: content-box;
 }
 
-.top-container {
-  position: relative;
-  width:99%;
-  height:99%;
+.main {
+  margin:0 auto;
+  position:relative;
+  width:100%;
+  height:100%;
   background-color: red;
-  margin: 2%;
-  padding: 1%;
-  padding-bottom: 90%;
-  border-style: groove;
-  border-width: thick;
-  border-color: #000;
+  border:1px solid black;
   z-index: 0;
 }
-
+.navigation {
+  margin:0 auto;
+  position:relative;
+  background-color: red;
+  border:1px solid black;
+}
+.search {
+  margin:0 auto;
+  background-color:white;
+  z-index: 2;
+  margin-top:10%;
+}
 #logo {
   position: relative;
   float: left;
@@ -34,20 +41,6 @@
   margin-top: 1%;
   margin-bottom: -4%;
   z-index: 1;
-}
-
-.info-container {
-  float: left;
-  position: relative;
-  width: 70%;
-  height: 15%;
-  background-color: pink;
-  margin: 1%;
-  padding: 1%;
-  margin-top: 11%;
-  margin-left: 13%;
-  margin-bottom: 15%;
-  z-index: 2;
 }
 
 .invisible-container {
