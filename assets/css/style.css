@@ -2,11 +2,8 @@
   text-align: center;
   box-sizing: content-box;
 }
-.navigation {
-  margin:0 auto;
-  position:relative;
-  background-color: red;
-  border:1px solid black;
+html, body {
+    height:100%;
 }
 .main {
   margin:0 auto;
@@ -14,14 +11,29 @@
   width:100%;
   height:100%;
   background-color: red;
-  border:1px solid black;
   z-index: 0;
 }
-.search {
+.navigation {
+  margin:0 auto;
+  height:130px;
+  position:relative;
+  background-color: red;
+  border:1px solid black;
+}
+#logo {
+  width:150px;
+}
+.content {
+  height:50%;
   margin:0 auto;
   background-color:white;
   z-index: 2;
   margin-top:10%;
+}
+.verticalcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }
 #logo {
   position: relative;
