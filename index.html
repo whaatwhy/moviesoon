@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="assets/css/style.css">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
 	<title>Movie Soon</title>
 </head>
 <body>
 	<div class="main container">
 		<div class="navigation container">
-			<a class="navbar-brand" href="#"><img src="assets/images/movie soon-logo.png" alt="Movie Soon" id="logo"/></a>
-    	<ul class="nav navbar-nav navbar-right">
-   			<li><a href="#">About Us</a></li>
-  		</ul>
+			<a class="navbar-brand" href="#"><img alt="Movie Soon" id="logo" src="assets/images/movie%20soon-logo.png"></a>
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href="#">About Us</a>
+				</li>
+			</ul>
 		</div>
 		<div class="content container">
 			<div class="row myRow">
+
  				<div class="col-xs-12">
  					<input class="searchbox animation-target" type="text" name="search" value="" id = 'userInput'>
  					<input id ="submit" class="moviesoonbutton animation-target" type="submit" value="Submit">
@@ -40,6 +43,33 @@
     <script src="assets\javascript\logic.js"></script>
  		<script type="text/javascript">
 
-    </script>
-  </body>
+			</div>
+			<div class="return-size" id="movie-data">
+			</div>
+			<div class="return-size" >
+        <textarea id="user-review" type='text' value=''></textarea>
+        <input id ='submitReviewButton' type="submit" value='submit'>
+			</div>
+			<div class="return-size" id="review-box">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Reviews</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+			</div>
+		</div>
+	</div><!--<script src=“https://www.gstatic.com/firebasejs/4.2.0/firebase.js“></script>-->
+	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js">
+	</script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js">
+	</script>
+	<script src="assets/javascript/logic.js">
+	</script>
+	<script type="text/javascript">
+	</script>
+</body>
 </html>
