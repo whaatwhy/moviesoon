@@ -1,6 +1,9 @@
 html, body {
     height:100%;
     width:100%;
+    background-image: url("https://media.giphy.com/media/xUySTyCkMcN0Mw622I/giphy.gif");
+    background-repeat:no-repeat;
+  background-size: 100% 100%;
 }
 .main {
   margin:0 auto;
@@ -36,21 +39,22 @@ html, body {
   margin-bottom: 1%;
   z-index: 1;
 }
+.searchbox {
+  line-height:40px;
+  width:400px;
+}
 .moviesoonbutton {
     padding: 14px 24px;
     border: 0 none;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-}
-.moviesoonbutton: {
-    color: #ffffff;
-}
- 
+} 
 .moviesoonbutton:hover {
     background: #166fff;
     color:#ffffff;
 }
+
 
 #about {
   position: relative;
