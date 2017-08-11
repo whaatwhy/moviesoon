@@ -1,5 +1,4 @@
 
-// Initialize Firebase
   var config = {
     apiKey: "AIzaSyBuS8nclrAYanROXUHbjObahizCD09OzRI",
     authDomain: "moviesoon-99bc7.firebaseapp.com",
@@ -12,84 +11,76 @@
 
   var database 	= firebase.database();
 
-  var authKeyGiphy = "550aa0ca0e7e4111a77bbb3c150b8351";
 
-  var queryGiphy = "http://api.giphy.com/v1/gifs/trending?api_key=" + authKeyGiphy;
+  //var queryGiphy = "http://api.giphy.com/v1/gifs/trending?api_key=550aa0ca0e7e4111a77bbb3c150b8351";
 
 
-  $('#submit').on('click', function(event){
-    console.log("I got clicked");
-    var movie = $(this).attr('data-name');
-    var queryOmbd =  "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=104c64bb";
+$('#submit').on('keypress click ', function(event){
 
-    event.preventDefault();
+  event.preventDefault();
+
+  var movie = $('#userInput').val();
+  var queryOmdb =  "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=104c64bb";
+
+  var giphyMovie = "http://api.giphy.com/v1/gifs/search?q=" + movie + "+movie&api_key=550aa0ca0e7e4111a77bbb3c150b8351&limit=1";
+  console.log(giphyMovie);
+
+  $.ajax ({
+    url: giphyMovie,
+      method: "GET"
+  })
+  .done(function(response) {
+    var results = response.data[0].images.preview_gif.url;
+    $('body').css('background-image', 'url(' + results + ')');
+        //$(".main-container").append(results);
+      //$('#html').prepend(movieDiv);
+
+
+    });
+
+
+
   $.ajax({
-	   url: queryOmbd,
+	   url: queryOmdb,
 	    method: "GET"
     }).done(function(response){
 
+      var rating = response.Rated;
+      var released = response.Released;
+      var plot = response.Plot;
+      var imgURL = response.Poster;
 
-        var rating = response.Rated;
+      $("#movie-data").empty();
+      $("#poster").empty();
+      
+      $("#movie-data").append("Rating:" + rating);
+      $("#movie-data").append("Released: " + released);
+      $("#movie-data").append("Plot " + plot);
+      $("#poster").append("<img id='theImg' src='" + imgURL + "' />");
 
-        var pRating = $("#movie-data").append("Rating:" + rating);
+     });
+   });
 
-        $('#movie-data').append(pRating);
 
-        var released = response.Released;
 
-        var pReleased = $("#movie-data").append("Released: " + released);
-
-        $('#movie-data').append(pReleased);
-
-        var plot = response.Plot;
-
-        var pPlot = $("#movie-data").append("Plot " + plot);
-
-        $('#movie-data').append(pPlot)
-
-        var imgURL = response.Poster;
-
-        var image = $("#poster").append("src", imgURL);
-
-        $('#poster').append(image);
-
-      });
-});
-
-/*$('#submit').on('click', function(event){
-  console.log("I got clicked");
+$('#submitReviewButton').on('click ', function(event){
   event.preventDefault();
 
-  var movie = $('#submitButton').val();
+  var review = $('#user-review').val().trim();
 
-  $('.invisible-container').append(movie);
-});*/
+  var reviewOb = {
+    movieReview: review
+  }
 
-//$(document).on('click', '.movie-data', displayMovieInfo);
-
-  //var movie = $("#userInput").val().trim();
-
-  //$('#movie-data').append(movie);
-
-
-
-/*function getOmdb (){
-console.log("This is GEt OMDB");
-$.ajax({
-	url: queryOmdb,
-	method: "GET"
-}).done(function(response){
-var posterImage = $('#poster');
-console.log(posterImage);
+  database.ref().push(reviewOb);
+  console.log(review);
+  $('#user-review').val('');
 });
-}
-// End of Functions
 
+database.ref().orderByChild('TIMESTAMP').limitToLast(10).on("child_added", function(snapshot) {
+  console.log(snapshot.val());
 
-// Main Process
-$('#submit').on('click', function(){
-	console.log("I got clicked");
-	var movieTitle = $('#submit').val();
-getOmdb();
-// getGiphy();
-});*/
+  var userReview = snapshot.val().movieReview;
+
+  $(".table > tbody").append('<tr><td>'+ userReview +'</td><tr>');
+});
