@@ -1,45 +1,65 @@
-<!DOCTYPE html>
 <html>
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="assets/css/style.css">
-	<link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
-	<title>Movie Soon</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
+  <title>Movie Soon</title>
 </head>
+
 <body>
-	<div class="main container">
-		<div class="navigation container">
-			<a class="navbar-brand" href="#"><img src="assets/images/movie soon-logo.png" alt="Movie Soon" id="logo"/></a>
-    	<ul class="nav navbar-nav navbar-right">
-   			<li><a href="#">About Us</a></li>
-  		</ul>
-		</div>
+  <div class="main container">
+    <!-- nav bar -->
+    <div class="navigation container">
+      <a class="navbar-brand" href="#"><img src="assets/images/movie soon-logo.png" alt="Movie Soon" id="logo" /></a>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">About Us</a></li>
+      </ul>
+    </div>
+    
+    <!-- search box -->
+    <div class="search-wrap">
+      <input class="searchbox" type="text" name="search" value="" id='userInput'>
+      <input id="submit" class="moviesoonbutton" type="submit" value="Submit">
+    </div>
+    
+    <!-- main content -->
+		<!-- First Row -->
 		<div class="content container">
-			<div class="row myRow">
- 				<div class="col-xs-12">
- 					<input class="searchbox animation-target" type="text" name="search" value="" id = 'userInput'>
- 					<input id ="submit" class="moviesoonbutton animation-target" type="submit" value="Submit">
- 				</div>
-			</div>
-	</div>
+  		<div class="row">
+    		<div class="col-lg-6" style="background-color:yellow;">
+    			<div class="well" id="posterBox">
+      			<p>Test</p>
+    			</div><!-- close well -->
+      	</div><!-- close column -->
+				<div class="col-lg-6" style="background-color:yellow;">
+    			<div class="well" id="movieDataBox">
+      			<p>Test</p>
+    			</div><!-- close well -->
+      	</div><!-- close column -->
+			</div><!-- close row 1 -->
+  		<!-- End of First Row -->
+			<!-- Second Row -->
+  		<div class="row">
+    		<div class="col-lg-12" style= "background-color:yellow;">
+    			<div class="well" id="reviewBox">
+      			<p>Test</p>
+  				</div><!-- close well -->
+     		</div><!-- close column -->
+     	</div><!-- close row 2 -->
+		</div><!-- close content container -->
+	</div><!-- close main container -->
+	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="assets\javascript\logic.js"></script>
+	<script type="text/javascript"></script>
+	<script>
+		$(".moviesoonbutton").on("click", function() {
+ 			$(".search-wrap").addClass('move-top');
+ 			$(".content").addClass('appear');
+		});
+	</script>
+</body>
 
-
-<!--           <div class="invisible-container">
-            <div id="poster" class="return-size">poster</div>
-              <div id="movie-data" class="return-size">movie-data</div>
-                <div id="user-review" class="return-size">user-review</div>
-                  <div id="twitter-feed" class="return-size">twitter-feed</div>
-            </div>
-    </div> -->
-
-
-    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="assets\javascript\logic.js"></script>
- 		<script type="text/javascript">
-
-    </script>
-  </body>
 </html>
