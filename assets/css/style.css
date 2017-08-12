@@ -20,7 +20,7 @@ html, body {
 #logo {
   width:150px;
 }
-.content {
+#content {
   display:none;
   margin-top:10%;
   margin:0 auto;
