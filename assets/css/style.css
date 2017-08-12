@@ -20,14 +20,14 @@ html, body {
 #logo {
   width:150px;
 }
-.hidden {
+#content {
   display:none;
   margin-top:10%;
   margin:0 auto;
   z-index: 2;
 }
 .appear {
-  display:block;
+  display:block!important;
 }
 /* animation */
 .search-wrap {
@@ -43,7 +43,6 @@ html, body {
 }
 .search-wrap.move-top {
   top:10px;
-  
   -webkit-transition:.3s ease-in-out;
   transition:.3s ease-in-out;
 }
