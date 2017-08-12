@@ -1,9 +1,9 @@
 html, body {
     height:100%;
     width:100%;
-    background-image: url("https://media.giphy.com/media/xUySTyCkMcN0Mw622I/giphy.gif");
+    background-color:#166fff;
     background-repeat:no-repeat;
-  background-size: 100% 100%;
+    background-size: 100% 100%;
 }
 .main {
   margin:0 auto;
@@ -62,10 +62,12 @@ html, body {
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
+    background:#e83e3e;
+    color:#ffffff;
 } 
 .moviesoonbutton:hover {
-    background: #166fff;
-    color:#ffffff;
+    background: #ffffff;
+    color:#166fff;
 }
 #poster {
 }
