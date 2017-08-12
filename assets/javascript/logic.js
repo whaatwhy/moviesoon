@@ -14,11 +14,13 @@
   //var queryGiphy = "http://api.giphy.com/v1/gifs/trending?api_key=550aa0ca0e7e4111a77bbb3c150b8351";
 
   function checkReviews() {
+    $(".table > tbody").empty();
     if(movieReviews = true) { //if(movieReviews > 0)
       database.ref().orderByChild('TIMESTAMP').limitToLast(10).on("child_added", function(snapshot) {
         console.log(snapshot.val());
         var userReview = snapshot.val().movieReview;
-        $(".table > tbody").append('<tr><td>'+ userReview +'</td><tr>');
+
+        $(".table > tbody").prepend('<tr><td>'+ userReview +'</td><tr>');
       })
     }
   }
@@ -75,6 +77,7 @@ $('#submit').on('keypress click ', function(event){
       $("#movie-data").empty();
       $("#poster").empty();
 
+
       var movieDiv = $("<div class='movie'>");
 
       $('#movie-data').append(movieDiv);
@@ -106,6 +109,7 @@ $('#submitreviewbutton').on('click ', function(event){
   var reviewOb = {
     movieReview: review
   }
+
   database.ref().push(reviewOb);
   console.log(review);
   $('#user-review').val('');
