@@ -43,32 +43,43 @@ $('#submit').on('keypress click ', function(event){
   })
   .done(function(response) {
     var results = response.data[0].images.preview_gif.url;
-    $('body').css('background-image', 'url(' + results + ')');
+    $("#giphyBox").css('background-image', 'url(' + results + ')');
         //$(".main-container").append(results);
       //$('#html').prepend(movieDiv);
-
-
     });
-
-
 
   $.ajax({
 	   url: queryOmdb,
 	    method: "GET"
     }).done(function(response){
 
+
+
       var rating = response.Rated;
       var released = response.Released;
       var plot = response.Plot;
       var imgURL = response.Poster;
 
-      $("#movie-data").empty();
+      $("#movie").empty();
       $("#poster").empty();
 
-      $("#movie-data").append("Rating:" + rating);
-      $("#movie-data").append("Released: " + released);
-      $("#movie-data").append("Plot " + plot);
-      $("#poster").append("<img id='theImg' src='" + imgURL + "' />");
+      var movieDiv = $("<div class='movie'>");
+
+      $('#content .row .col-xs-7').append(movieDiv);
+
+      var pRating = $('<p>').text('Rating:' + rating);
+      var pReleased = $('<p>').text('Released:' + released);
+      var pPlot = $('<p>').text('Plot:' + plot);
+      //var pImg = $('<img>').attr('src', imgURL);
+
+      movieDiv.append(pRating);
+      movieDiv.append(pReleased);
+      movieDiv.append(pPlot);
+
+      // $("#movie-data").append("Rating:" + rating);
+      // $("#movie-data").append("Released: " + released);
+      // $("#movie-data").append("Plot: " + plot);
+       $("#poster").append("<img id='theImg' src='" + imgURL + "' />");
 
      });
 
@@ -80,7 +91,7 @@ $('#submit').on('keypress click ', function(event){
 $('#submitReviewButton').on('click ', function(event){
   event.preventDefault();
 
-  var review = $('#user-review').val().trim();
+  var review = $('#user-data').val().trim();
 
   var reviewOb = {
     movieReview: review
@@ -88,6 +99,6 @@ $('#submitReviewButton').on('click ', function(event){
 
   database.ref().push(reviewOb);
   console.log(review);
-  $('#user-review').val('');
+  $('#user-data').val('');
   checkReviews(); //Do we want this here?
 });
