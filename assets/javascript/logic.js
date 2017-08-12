@@ -1,4 +1,3 @@
-
   var config = {
     apiKey: "AIzaSyBuS8nclrAYanROXUHbjObahizCD09OzRI",
     authDomain: "moviesoon-99bc7.firebaseapp.com",
@@ -34,7 +33,7 @@ $('#submit').on('keypress click ', function(event){
   var movie = $('#userInput').val();
   var queryOmdb =  "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=104c64bb";
 
-  var giphyMovie = "http://api.giphy.com/v1/gifs/search?q=" + movie + "+movie&api_key=550aa0ca0e7e4111a77bbb3c150b8351&limit=1";
+  var giphyMovie = "http://api.giphy.com/v1/gifs/search?q=" + movie + "+movie&api_key=550aa0ca0e7e4111a77bbb3c150b8351&limit=10";
   console.log(giphyMovie);
 
   $.ajax ({
@@ -42,11 +41,21 @@ $('#submit').on('keypress click ', function(event){
       method: "GET"
   })
   .done(function(response) {
-    var results = response.data[0].images.preview_gif.url;
-    $("#giphyBox").css('background-image', 'url(' + results + ')');
+    for(var i=0; i<10; i++) {
+      var results = response.data[i].images.fixed_width.url;
+      var resultsstill = response.data[i].images.fixed_width_still.url;
+      var gifBox = $("<div class='gifWrap'>");
+      var gifImage = $("<img class='gifImg'>");
+      gifImage.attr("src", resultsstill);
+      gifImage.attr("data-still", resultsstill);
+      gifImage.attr("data-animate", results);
+      gifImage.attr("data-state", "still");
+      $("#giphyBox").append(gifBox);
+      gifBox.append(gifImage);
         //$(".main-container").append(results);
       //$('#html').prepend(movieDiv);
-    });
+    }
+  });
 
   $.ajax({
 	   url: queryOmdb,
@@ -59,13 +68,16 @@ $('#submit').on('keypress click ', function(event){
       var released = response.Released;
       var plot = response.Plot;
       var imgURL = response.Poster;
+      var movieId = response.imdbID;
+      console.log(movieId);
 
-      $("#movie").empty();
+      $("#giphyBox").empty();
+      $("#movie-data").empty();
       $("#poster").empty();
 
       var movieDiv = $("<div class='movie'>");
 
-      $('#content .row .col-xs-7').append(movieDiv);
+      $('#movie-data').append(movieDiv);
 
       var pRating = $('<p>').text('Rating:' + rating);
       var pReleased = $('<p>').text('Released:' + released);
@@ -88,17 +100,26 @@ $('#submit').on('keypress click ', function(event){
 });
 
 
-$('#submitReviewButton').on('click ', function(event){
+$('#submitreviewbutton').on('click ', function(event){
   event.preventDefault();
-
-  var review = $('#user-data').val().trim();
-
+  var review = $('#user-review').val().trim();
   var reviewOb = {
     movieReview: review
   }
-
   database.ref().push(reviewOb);
   console.log(review);
-  $('#user-data').val('');
+  $('#user-review').val('');
   checkReviews(); //Do we want this here?
 });
+
+  $(document).on("click", ".gifImg", switcher);
+  function switcher() {
+      var state = $(this).attr("data-state");
+      if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+      }
+    }
