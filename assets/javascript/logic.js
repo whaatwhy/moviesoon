@@ -1,43 +1,30 @@
-  var config = {
-    apiKey: "AIzaSyBuS8nclrAYanROXUHbjObahizCD09OzRI",
-    authDomain: "moviesoon-99bc7.firebaseapp.com",
-    databaseURL: "https://moviesoon-99bc7.firebaseio.com",
-    projectId: "moviesoon-99bc7",
-    storageBucket: "",
-    messagingSenderId: "624991343805"
-  };
-  firebase.initializeApp(config);
+var config = {
+  apiKey: "AIzaSyBuS8nclrAYanROXUHbjObahizCD09OzRI",
+  authDomain: "moviesoon-99bc7.firebaseapp.com",
+  databaseURL: "https://moviesoon-99bc7.firebaseio.com",
+  projectId: "moviesoon-99bc7",
+  storageBucket: "",
+  messagingSenderId: "624991343805"
+};
 
-  var database 	= firebase.database();
-
-
-  //var queryGiphy = "http://api.giphy.com/v1/gifs/trending?api_key=550aa0ca0e7e4111a77bbb3c150b8351";
-
-  function checkReviews() {
-    $(".table > tbody").empty();
-    if(movieReviews = true) { //if(movieReviews > 0)
-      database.ref().orderByChild('TIMESTAMP').limitToLast(10).on("child_added", function(snapshot) {
-        console.log(snapshot.val());
-        var userReview = snapshot.val().movieReview;
-
-        $(".table > tbody").prepend('<tr><td>'+ userReview +'</td><tr>');
-      })
-    }
-  }
-
-
-
+firebase.initializeApp(config);
+var database 	= firebase.database();
+//var queryGiphy = "http://api.giphy.com/v1/gifs/trending?api_key=550aa0ca0e7e4111a77bbb3c150b8351";
+function checkReviews() {
+  $(".table > tbody").empty();
+  database.ref().orderByChild('TIMESTAMP').limitToLast(10).on("child_added", function(snapshot) {
+    console.log(snapshot.val());
+    var userReview = snapshot.val().movieReview;
+    $(".table > tbody").prepend('<tr><td>'+ userReview +'</td><tr>');
+  })
+}
 
 $('#submit').on('keypress click ', function(event){
-
   event.preventDefault();
-
   var movie = $('#userInput').val();
-  var queryOmdb =  "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=104c64bb";
-
-  var giphyMovie = "http://api.giphy.com/v1/gifs/search?q=" + movie + "+movie&api_key=550aa0ca0e7e4111a77bbb3c150b8351&limit=10";
+  var queryOmdb =  "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=104c64bb";
+  var giphyMovie = "https://api.giphy.com/v1/gifs/search?q=" + movie + "+movie&api_key=550aa0ca0e7e4111a77bbb3c150b8351&limit=10";
   console.log(giphyMovie);
-
   $.ajax ({
     url: giphyMovie,
       method: "GET"
@@ -54,76 +41,67 @@ $('#submit').on('keypress click ', function(event){
       gifImage.attr("data-state", "still");
       $("#giphyBox").append(gifBox);
       gifBox.append(gifImage);
-        //$(".main-container").append(results);
+      //$(".main-container").append(results);
       //$('#html').prepend(movieDiv);
     }
   });
-
   $.ajax({
 	   url: queryOmdb,
 	    method: "GET"
-    }).done(function(response){
-
-
-
-      var rating = response.Rated;
-      var released = response.Released;
-      var plot = response.Plot;
-      var imgURL = response.Poster;
-      var movieId = response.imdbID;
-      console.log(movieId);
-
-      $("#giphyBox").empty();
-      $("#movie-data").empty();
-      $("#poster").empty();
-
-
-      var movieDiv = $("<div class='movie'>");
-
-      $('#movie-data').append(movieDiv);
-
-      var pRating = $('<p>').text('Rating:' + rating);
-      var pReleased = $('<p>').text('Released:' + released);
-      var pPlot = $('<p>').text('Plot:' + plot);
-      //var pImg = $('<img>').attr('src', imgURL);
-
-      movieDiv.append(pRating);
-      movieDiv.append(pReleased);
-      movieDiv.append(pPlot);
-
-      // $("#movie-data").append("Rating:" + rating);
-      // $("#movie-data").append("Released: " + released);
-      // $("#movie-data").append("Plot: " + plot);
-       $("#poster").append("<img id='theImg' src='" + imgURL + "' />");
-
-     });
-
-
-   checkReviews();
+  })
+  .done(function(response){
+    var rating = response.Rated;
+    var released = response.Released;
+    var plot = response.Plot;
+    var imgURL = response.Poster;
+    var movieId = response.imdbID;
+    $("#giphyBox").empty();
+    $("#movie-data").empty();
+    $("#poster").empty();
+    var movieDiv = $("<div class='movie'>");
+    $('#movie-data').append(movieDiv);
+    var pRating = $('<p>').text('Rating:' + rating);
+    var pReleased = $('<p>').text('Released:' + released);
+    var pPlot = $('<p>').text('Plot:' + plot);
+    var hideId = $("<div class='hideId'>").text(movieId);
+    //var pImg = $('<img>').attr('src', imgURL);
+    movieDiv.append(pRating);
+    movieDiv.append(pReleased);
+    movieDiv.append(pPlot);
+    movieDiv.append(hideId);
+    // $("#movie-data").append("Rating:" + rating);
+    // $("#movie-data").append("Released: " + released);
+    // $("#movie-data").append("Plot: " + plot);
+    $("#poster").append("<img id='theImg' src='" + imgURL + "' />");
+  });
+  checkReviews();
 });
-
 
 $('#submitreviewbutton').on('click ', function(event){
   event.preventDefault();
   var review = $('#user-review').val().trim();
+  var movId = $('.hideId').val().trim();
+  console.log(movId);
   var reviewOb = {
-    movieReview: review
+    movieReview: review,
+    movieId: movId,
   }
-
   database.ref().push(reviewOb);
   console.log(review);
   $('#user-review').val('');
   checkReviews(); //Do we want this here?
 });
 
-  $(document).on("click", ".gifImg", switcher);
-  function switcher() {
-      var state = $(this).attr("data-state");
-      if (state === "still") {
-        $(this).attr("src", $(this).attr("data-animate"));
-        $(this).attr("data-state", "animate");
-      } else {
-        $(this).attr("src", $(this).attr("data-still"));
-        $(this).attr("data-state", "still");
-      }
-    }
+$(document).on("click", ".gifImg", switcher);
+  
+function switcher() {
+  var state = $(this).attr("data-state");
+  if (state === "still") {
+    $(this).attr("src", $(this).attr("data-animate"));
+    $(this).attr("data-state", "animate");
+  } 
+  else {
+    $(this).attr("src", $(this).attr("data-still"));
+    $(this).attr("data-state", "still");
+  }
+}
