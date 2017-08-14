@@ -46,6 +46,17 @@ html, body {
   -webkit-transition:.3s ease-in-out;
   transition:.3s ease-in-out;
 }
+.gifWrap {
+  display: inline-block;
+  height: 130px;
+  padding: 2px;
+  width: 50%;
+}
+.gifImg {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
 .myRow {
     height:50%;
     padding:10%;
@@ -55,6 +66,7 @@ html, body {
   line-height:45px;
   width:400px;
   border:0px;
+  padding-left:10px;
 }
 .moviesoonbutton {
     padding: 14px 24px;
@@ -68,6 +80,8 @@ html, body {
 .moviesoonbutton:hover {
     background: #ffffff;
     color:#166fff;
+}
+.hideId {
 }
 #poster {
 }
@@ -127,8 +141,4 @@ html, body {
   82.78% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
   100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
 }
-
-
-
-
 
