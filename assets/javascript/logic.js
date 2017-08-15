@@ -10,20 +10,29 @@
 
   var database 	= firebase.database();
 
+  var movieId = '';
 
   //var queryGiphy = "http://api.giphy.com/v1/gifs/trending?api_key=550aa0ca0e7e4111a77bbb3c150b8351";
 
   function checkReviews() {
     $(".table > tbody").empty();
-    if(movieReviews = true) { //if(movieReviews > 0)
-      database.ref().orderByChild('TIMESTAMP').limitToLast(10).on("child_added", function(snapshot) {
-        console.log(snapshot.val());
-        var userReview = snapshot.val().movieReview;
+    //if(reviewOb = true) {
+    //if(reviewOb > 0) {
 
+       console.log('looking for movieid = ' + movieId);
+       database.ref().orderByChild('TIMESTAMP').equalTo(movieId).limitToLast(10).on("child_added", function(snapshot) {
+       //database.ref().orderByChild('movieId').equalTo(movieId).limitToLast(10).on("child_added", function(snapshot) {
+      // database.ref().orderByChild('movieId').equalTo(movieId).on('child_added', function(snapshot) {
+      // database.ref().orderByChild('movieId').equalTo(true).on('child_added', function(Data){
+      //database.ref().orderByChild('TIMESTAMP').limitToLast(10).on("child_added", function(snapshot) {
+      //database.ref().orderByChild('TIMESTAMP').equalTo(movieId).on("value", function(snapshot) {
+        console.log("The object from firebase" + snapshot.val());
+        var userReview = snapshot.val().movieReview;
         $(".table > tbody").prepend('<tr><td>'+ userReview +'</td><tr>');
-      })
-    }
-  }
+      });
+    };
+
+  //};
 
 
 
@@ -36,7 +45,7 @@ $('#submit').on('keypress click ', function(event){
   var queryOmdb =  "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=104c64bb";
 
   var giphyMovie = "http://api.giphy.com/v1/gifs/search?q=" + movie + "+movie&api_key=550aa0ca0e7e4111a77bbb3c150b8351&limit=10";
-  console.log(giphyMovie);
+  console.log('giphymovie ' + giphyMovie);
 
   $.ajax ({
     url: giphyMovie,
@@ -59,19 +68,21 @@ $('#submit').on('keypress click ', function(event){
     }
   });
 
+
   $.ajax({
 	   url: queryOmdb,
 	    method: "GET"
     }).done(function(response){
 
 
-
+      movieId = response.imdbID
       var rating = response.Rated;
       var released = response.Released;
       var plot = response.Plot;
       var imgURL = response.Poster;
-      var movieId = response.imdbID;
-      console.log(movieId);
+
+    //  movieId = response.imdbID;
+      console.log('movieid from imdb ' + movieId);
 
       $("#giphyBox").empty();
       $("#movie-data").empty();
@@ -87,9 +98,11 @@ $('#submit').on('keypress click ', function(event){
       var pPlot = $('<p>').text('Plot:' + plot);
       //var pImg = $('<img>').attr('src', imgURL);
 
+      //movieDiv.append(pTitle);
       movieDiv.append(pRating);
       movieDiv.append(pReleased);
       movieDiv.append(pPlot);
+
 
       // $("#movie-data").append("Rating:" + rating);
       // $("#movie-data").append("Released: " + released);
@@ -98,8 +111,8 @@ $('#submit').on('keypress click ', function(event){
 
      });
 
+     checkReviews();
 
-   checkReviews();
 });
 
 
@@ -107,13 +120,13 @@ $('#submitreviewbutton').on('click ', function(event){
   event.preventDefault();
   var review = $('#user-review').val().trim();
   var reviewOb = {
-    movieReview: review
+    movieReview: review,
+    movieId: movieId
   }
-
   database.ref().push(reviewOb);
-  console.log(review);
+  console.log('review on click ' + review);
   $('#user-review').val('');
-  checkReviews(); //Do we want this here?
+  checkReviews();
 });
 
   $(document).on("click", ".gifImg", switcher);
