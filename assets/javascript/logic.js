@@ -19,7 +19,7 @@
       database.ref().orderByChild('TIMESTAMP').limitToLast(10).on("child_added", function(snapshot) {
         console.log(snapshot.val());
         var userReview = snapshot.val().movieReview;
-
+        var movieId = snapshot.val().id;
         $(".table > tbody").prepend('<tr><td>'+ userReview +'</td><tr>');
       })
     }
@@ -27,14 +27,10 @@
 
 
 
-
 $('#submit').on('keypress click ', function(event){
-
   event.preventDefault();
-
   var movie = $('#userInput').val();
   var queryOmdb =  "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=104c64bb";
-
   var giphyMovie = "http://api.giphy.com/v1/gifs/search?q=" + movie + "+movie&api_key=550aa0ca0e7e4111a77bbb3c150b8351&limit=10";
   console.log(giphyMovie);
 
@@ -64,8 +60,6 @@ $('#submit').on('keypress click ', function(event){
 	    method: "GET"
     }).done(function(response){
 
-
-
       var rating = response.Rated;
       var released = response.Released;
       var plot = response.Plot;
@@ -85,12 +79,13 @@ $('#submit').on('keypress click ', function(event){
       var pRating = $('<p>').text('Rating:' + rating);
       var pReleased = $('<p>').text('Released:' + released);
       var pPlot = $('<p>').text('Plot:' + plot);
+      var hideMovieId = $('<p id="movieId">').text(movieId);
       //var pImg = $('<img>').attr('src', imgURL);
 
       movieDiv.append(pRating);
       movieDiv.append(pReleased);
       movieDiv.append(pPlot);
-
+      movieDiv.append(hideMovieId);
       // $("#movie-data").append("Rating:" + rating);
       // $("#movie-data").append("Released: " + released);
       // $("#movie-data").append("Plot: " + plot);
@@ -105,9 +100,12 @@ $('#submit').on('keypress click ', function(event){
 
 $('#submitreviewbutton').on('click ', function(event){
   event.preventDefault();
+  console.log("#movieId");
   var review = $('#user-review').val().trim();
+  var id = $('#movieId').val().trim();
   var reviewOb = {
-    movieReview: review
+    movieReview: review,
+    movieId: id
   }
 
   database.ref().push(reviewOb);
