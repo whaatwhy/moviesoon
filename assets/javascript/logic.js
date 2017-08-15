@@ -38,9 +38,7 @@
 
 
 $('#submit').on('keypress click ', function(event){
-
   event.preventDefault();
-
   var movie = $('#userInput').val();
   var queryOmdb =  "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=104c64bb";
 
@@ -63,7 +61,7 @@ $('#submit').on('keypress click ', function(event){
       gifImage.attr("data-state", "still");
       $("#giphyBox").append(gifBox);
       gifBox.append(gifImage);
-        //$(".main-container").append(results);
+      //$(".main-container").append(results);
       //$('#html').prepend(movieDiv);
     }
   });
@@ -115,10 +113,11 @@ $('#submit').on('keypress click ', function(event){
 
 });
 
-
 $('#submitreviewbutton').on('click ', function(event){
   event.preventDefault();
   var review = $('#user-review').val().trim();
+  var movId = $('.hideId').val().trim();
+  console.log(movId);
   var reviewOb = {
     movieReview: review,
     movieId: movieId
@@ -129,14 +128,16 @@ $('#submitreviewbutton').on('click ', function(event){
   checkReviews();
 });
 
-  $(document).on("click", ".gifImg", switcher);
-  function switcher() {
-      var state = $(this).attr("data-state");
-      if (state === "still") {
-        $(this).attr("src", $(this).attr("data-animate"));
-        $(this).attr("data-state", "animate");
-      } else {
-        $(this).attr("src", $(this).attr("data-still"));
-        $(this).attr("data-state", "still");
-      }
-    }
+$(document).on("click", ".gifImg", switcher);
+
+function switcher() {
+  var state = $(this).attr("data-state");
+  if (state === "still") {
+    $(this).attr("src", $(this).attr("data-animate"));
+    $(this).attr("data-state", "animate");
+  }
+  else {
+    $(this).attr("src", $(this).attr("data-still"));
+    $(this).attr("data-state", "still");
+  }
+}

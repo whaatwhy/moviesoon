@@ -81,6 +81,8 @@ html, body {
     background: #ffffff;
     color:#166fff;
 }
+.hideId {
+}
 #poster {
 }
 #theImg {
@@ -139,3 +141,7 @@ html, body {
   82.78% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
   100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 72cbe059c807ee7a14bde2d0a964d88759b0bb96
