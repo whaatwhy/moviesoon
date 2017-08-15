@@ -1,4 +1,4 @@
-  var config = {
+var config = {
     apiKey: "AIzaSyBuS8nclrAYanROXUHbjObahizCD09OzRI",
     authDomain: "moviesoon-99bc7.firebaseapp.com",
     databaseURL: "https://moviesoon-99bc7.firebaseio.com",
@@ -14,19 +14,19 @@
 
   //var queryGiphy = "http://api.giphy.com/v1/gifs/trending?api_key=550aa0ca0e7e4111a77bbb3c150b8351";
 
-  function checkReviews() {
+  function checkReviews(movieId) {
     $(".table > tbody").empty();
     //if(reviewOb = true) {
     //if(reviewOb > 0) {
 
        console.log('looking for movieid = ' + movieId);
-       database.ref().orderByChild('TIMESTAMP').equalTo(movieId).limitToLast(10).on("child_added", function(snapshot) {
-       //database.ref().orderByChild('movieId').equalTo(movieId).limitToLast(10).on("child_added", function(snapshot) {
+       // database.ref().orderByChild('TIMESTAMP').equalTo(movieId).limitToLast(10).on("child_added", function(snapshot) {
+       database.ref().orderByChild('movieId').equalTo(movieId).limitToLast(10).on("child_added", function(snapshot) {
       // database.ref().orderByChild('movieId').equalTo(movieId).on('child_added', function(snapshot) {
       // database.ref().orderByChild('movieId').equalTo(true).on('child_added', function(Data){
-      //database.ref().orderByChild('TIMESTAMP').limitToLast(10).on("child_added", function(snapshot) {
-      //database.ref().orderByChild('TIMESTAMP').equalTo(movieId).on("value", function(snapshot) {
-        console.log("The object from firebase" + snapshot.val());
+      // database.ref().orderByChild('TIMESTAMP').limitToLast(10).on("child_added", function(snapshot) {
+      // database.ref().orderByChild('TIMESTAMP').equalTo(movieId).on("value", function(snapshot) {
+        console.log("The object from firebase" + snapshot.val().movieReview);
         var userReview = snapshot.val().movieReview;
         $(".table > tbody").prepend('<tr><td>'+ userReview +'</td><tr>');
       });
@@ -40,6 +40,8 @@
 $('#submit').on('keypress click ', function(event){
   event.preventDefault();
   var movie = $('#userInput').val();
+  //this takes the id out of Firebase along with line 120
+  //var movieId = $('.hideId').val();
   var queryOmdb =  "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=104c64bb";
 
   var giphyMovie = "http://api.giphy.com/v1/gifs/search?q=" + movie + "+movie&api_key=550aa0ca0e7e4111a77bbb3c150b8351&limit=10";
@@ -73,15 +75,14 @@ $('#submit').on('keypress click ', function(event){
     }).done(function(response){
 
 
-      movieId = response.imdbID
+      movieId = response.imdbID;
       var rating = response.Rated;
       var released = response.Released;
       var plot = response.Plot;
       var imgURL = response.Poster;
 
-    //  movieId = response.imdbID;
       console.log('movieid from imdb ' + movieId);
-
+      checkReviews(movieId);
       $("#giphyBox").empty();
       $("#movie-data").empty();
       $("#poster").empty();
@@ -90,16 +91,17 @@ $('#submit').on('keypress click ', function(event){
       var movieDiv = $("<div class='movie'>");
 
       $('#movie-data').append(movieDiv);
-
       var pRating = $('<p>').text('Rating:' + rating);
       var pReleased = $('<p>').text('Released:' + released);
       var pPlot = $('<p>').text('Plot:' + plot);
+      //var hideDivId = $('<div class="hideId">').text(movieId); this one
       //var pImg = $('<img>').attr('src', imgURL);
 
       //movieDiv.append(pTitle);
       movieDiv.append(pRating);
       movieDiv.append(pReleased);
       movieDiv.append(pPlot);
+      //movieDiv.append(hideDivId); this one
 
 
       // $("#movie-data").append("Rating:" + rating);
@@ -109,15 +111,14 @@ $('#submit').on('keypress click ', function(event){
 
      });
 
-     checkReviews();
-
 });
 
 $('#submitreviewbutton').on('click ', function(event){
   event.preventDefault();
   var review = $('#user-review').val().trim();
-  var movId = $('.hideId').val().trim();
-  console.log(movId);
+  //takes the id out of firebase
+  //var movieId = $('.hideId').val().trim();
+  console.log(movieId);
   var reviewOb = {
     movieReview: review,
     movieId: movieId
@@ -125,7 +126,7 @@ $('#submitreviewbutton').on('click ', function(event){
   database.ref().push(reviewOb);
   console.log('review on click ' + review);
   $('#user-review').val('');
-  checkReviews();
+  //checkReviews();
 });
 
 $(document).on("click", ".gifImg", switcher);
