@@ -101,7 +101,7 @@ $('#submit').on('keypress click ', function(event){
       movieDiv.append(pRating);
       movieDiv.append(pReleased);
       movieDiv.append(pPlot);
-     
+
 
 
       // $("#movie-data").append("Rating:" + rating);
