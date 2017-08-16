@@ -18,8 +18,10 @@
 
     <!-- search box -->
     <div class=" animation-target search-wrap">
-      <input class="searchbox" type="text" name="search" value="" id='userInput'>
-      <input id="submit" class="moviesoonbutton" type="submit" value="Submit">
+    	<form id="searchform">
+      	<input class="searchbox" type="text" name="search" value="" id='userInput'>
+      	<input id="submit" class="moviesoonbutton" type="submit" value="Submit">
+      </form>
     </div>
 
     <!-- main content -->
@@ -42,8 +44,10 @@
       		<div class="panel panel-heading mypanel">
       			<h3>Reviews</h3>
     				<div class="panel" id="user-data">
+    				<form id="reviewform">
       				<input class="reviewsearchbox" type="text" name="search" value="" id='user-review' maxlength = "160">
       				<input id="submitreviewbutton" class="moviesoonreviewbutton" type="submit" value="Submit">
+      			</form>
       				<table class="table">
           			<thead>
             			<tr>
