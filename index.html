@@ -1,6 +1,7 @@
 <html>
 
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<link href="assets/css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
@@ -8,12 +9,19 @@
 </head>
 
 <body>
-  <div class="main container">
-    <!-- nav bar -->
+	<!-- background-image -->
+	<div id="bg">
+	  <img src="assets\images\movieBack.png" alt="back" width = "1350" height= "600">
+	</div>
+
+	<!--Mask-->
+	<div class="view">
+
+	        <!-- nav bar -->
     <div class="navigation container">
-      <a class="navbar-brand" href="#"><img src="assets/images/movie soon-logo.png" alt="Movie Soon" id="logo" /></a>
+      			<a class="navbar-brand" href="#"><img src="assets/images/movie soon-logo.png" alt="Movie Soon" id="logo" /></a>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">About Us</a></li>
+        <li><a href="#" id="about-us">About Us</a></li>
       </ul>
     </div>
 
@@ -71,7 +79,7 @@
 	<script>
 		$(".moviesoonbutton").on("click", function() {
  			$(".search-wrap").addClass('move-top');
- 			$(".content").addClass('appear');
+ 			$("#content").addClass('appear');
 		});
 	</script>
 </body>
