@@ -107,8 +107,8 @@ body {
 }
 /*Bounce Animation Below */
 .animation-target {
-  -webkit-animation: animation 1000ms linear both;
-  animation: animation 1000ms linear both;
+  -webkit-animation: animation 3000ms linear both;
+  animation: animation 3000ms linear both;
 }
 /* Generated with Bounce.js. Edit at https://goo.gl/bkOekC */
 @-webkit-keyframes animation {
