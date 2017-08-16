@@ -42,9 +42,9 @@ $('#submit').on('keypress click ', function(event){
   var movie = $('#userInput').val();
   //this takes the id out of Firebase along with line 120
   //var movieId = $('.hideId').val();
-  var queryOmdb =  "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=104c64bb";
+  var queryOmdb =  "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=104c64bb";
 
-  var giphyMovie = "http://api.giphy.com/v1/gifs/search?q=" + movie + "+movie&api_key=550aa0ca0e7e4111a77bbb3c150b8351&limit=10";
+  var giphyMovie = "https://api.giphy.com/v1/gifs/search?q=" + movie + "+movie&api_key=550aa0ca0e7e4111a77bbb3c150b8351&limit=10";
   console.log('giphymovie ' + giphyMovie);
 
   $.ajax ({
@@ -80,6 +80,12 @@ $('#submit').on('keypress click ', function(event){
       var released = response.Released;
       var plot = response.Plot;
       var imgURL = response.Poster;
+      var actors = response.Actors;
+      var title = response.Title;
+      var awards = response.Awards;
+      var language = response.Language;
+      var released = response.Released;
+      var genre = response.Genre;
 
       console.log('movieid from imdb ' + movieId);
       checkReviews(movieId);
@@ -94,13 +100,27 @@ $('#submit').on('keypress click ', function(event){
       var pRating = $('<p>').text('Rating:' + rating);
       var pReleased = $('<p>').text('Released:' + released);
       var pPlot = $('<p>').text('Plot:' + plot);
+      var pActors = $('<p>').text('Actors:' + actors);
+      var pTitle = $('<p>').text('Title:' + title);
+      var pAwards = $('<p>').text('Awards:' + awards);
+      var pLanguage = $('<p>').text('Language:' + language);
+      var pReleased = $('<p>').text('Released:' + released);
+      var pGenre = $('<p>').text('Genre:' + genre);
       //var hideDivId = $('<div class="hideId">').text(movieId); this one
       //var pImg = $('<img>').attr('src', imgURL);
 
       //movieDiv.append(pTitle);
+      
+      movieDiv.append(pTitle)
+      movieDiv.append(pActors);
       movieDiv.append(pRating);
       movieDiv.append(pReleased);
       movieDiv.append(pPlot);
+      movieDiv.append(pAwards);
+      movieDiv.append(pLanguage);
+      movieDiv.append(pReleased);
+      movieDiv.append(pGenre);
+
 
 
 
