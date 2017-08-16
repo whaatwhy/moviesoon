@@ -74,16 +74,16 @@ $('#submit').on('keypress click ', function(event) {
 
 		var movieDiv = $("<div class='movie'>");
 		$('#movie-data').append(movieDiv);
-    
-		var pRating = $('<p>').text('Rating:' + rating);
-		var pReleased = $('<p>').text('Released:' + released);
-		var pPlot = $('<p>').text('Plot:' + plot);
-		var pActors = $('<p>').text('Actors:' + actors);
+
+		var pRating = $('<p>').text('Rating: ' + rating);
+		var pReleased = $('<p>').text('Released: ' + released);
+		var pPlot = $('<p>').text('Plot: ' + plot);
+		var pActors = $('<p>').text('Actors:  ' + actors);
 		var pTitle = $('<p>').text('Title:' + title);
-		var pAwards = $('<p>').text('Awards:' + awards);
-		var pLanguage = $('<p>').text('Language:' + language);
-		var pReleased = $('<p>').text('Released:' + released);
-		var pGenre = $('<p>').text('Genre:' + genre);
+		var pAwards = $('<p>').text('Awards: ' + awards);
+		var pLanguage = $('<p>').text('Language: ' + language);
+		var pReleased = $('<p>').text('Released: ' + released);
+		var pGenre = $('<p>').text('Genre: ' + genre);
 
 		movieDiv.append(pTitle)
 		movieDiv.append(pActors);
