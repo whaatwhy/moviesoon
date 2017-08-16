@@ -1,7 +1,7 @@
 html, body {
     height:100%;
     width:100%;
-    background-color:#166fff;
+    background-image:url('assets\images\movieBack.png');
     background-repeat:no-repeat;
     background-size:100%;
 }
