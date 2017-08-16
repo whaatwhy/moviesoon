@@ -28,39 +28,45 @@
 		<div id="content" class="container">
   		<div class="row">
     		<div class="col-xs-5">
-    			<div class="well" id="poster">
-      			<p>Movie Poster</p>
+    			<div class="panel" id="poster">
     			</div><!-- close well -->
       	</div><!-- close column -->
 				<div class="col-xs-7">
-    			<div class="well" id="movie-data">
-      			<p>Movie Data</p>
-    			</div><!-- close well -->
-      	</div><!-- close column -->
+					<div class="panel panel-heading mypanel">
+      		  <h3>Movie Information</h3>
+    				<div id="movie-data">
+      				<p>Movie Data</p>
+    				</div><!-- close well -->
+    			</div>
+    		</div><!-- close column -->
       	<div class="col-xs-7">
-    			<div class="well" id="giphyBox">
-      			<p>Giphy Results</p>
-  				</div><!-- close well -->
+      		<div class="panel panel-heading mypanel">
+      			<h3>Reviews</h3>
+    				<div class="panel" id="user-data">
+      				<input class="reviewsearchbox" type="text" name="search" value="" id='user-review' maxlength = "160">
+      				<input id="submitreviewbutton" class="moviesoonreviewbutton" type="submit" value="Submit">
+      				<table class="table">
+          			<thead>
+            			<tr>
+            			</tr>
+          			</thead>
+          			<tbody>
+          			</tbody>
+        			</table>
+  					</div><!-- close well -->
+     			</div>
      		</div><!-- close column -->
 			</div><!-- close row 1 -->
   		<!-- End of First Row -->
 			<!-- Second Row -->
   		<div class="row">
-    		<div class="col-xs-12">
-    			<div class="well" id="user-data">
-      			<input class="reviewsearchbox" type="text" name="search" value="" id='user-review' maxlength = "160">
-      			<input id="submitreviewbutton" class="moviesoonreviewbutton" type="submit" value="Submit">
-      			<table class="table">
-          		<thead>
-            		<tr>
-              		<th>Reviews</th>
-            		</tr>
-          		</thead>
-          		<tbody>
-          		</tbody>
-        		</table>
-  				</div><!-- close well -->
-     		</div><!-- close column -->
+  			<div class="col-xs-12">
+  			  <div class="panel panel-heading">
+      		  <h3>Giphy Results</h3>
+    				<div class="well" id="giphyBox">
+  					</div><!-- close well -->
+     			</div><!-- close column -->
+    		</div>
      	</div><!-- close row 2 -->
 		</div><!-- close content container -->
 	</div><!-- close main container -->

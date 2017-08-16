@@ -1,9 +1,16 @@
-html, body {
+html {
     height:100%;
     width:100%;
     background-image:url('../images/movieBack.jpg');
     background-repeat:no-repeat;
     background-size: 100% 100%;
+}
+body {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+100 */
+    background: -webkit-linear-gradient(rgba(255,255,255,0) 50%, rgba(255,255,255,1) 100%);
+    background: -o-linear-gradient(rgba(255,255,255,0) 50%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(rgba(255,255,255,0) 50%, rgba(255,255,255,1) 100%); /* FF3.6-15 */ /* Chrome10-25,Safari5.1-6 */ /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 }
 .main {
   margin:0 auto;
@@ -25,6 +32,9 @@ html, body {
   margin-top:10%;
   margin:0 auto;
   z-index: 2;
+}
+.mypanel {
+  background-color:rgba(255, 255, 255, 0.7);
 }
 .appear {
   display:block!important;
@@ -50,7 +60,7 @@ html, body {
   display: inline-block;
   height: 130px;
   padding: 2px;
-  width: 50%;
+  width: 20%;
 }
 .gifImg {
     object-fit: cover;
