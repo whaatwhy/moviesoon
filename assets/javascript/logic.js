@@ -10,6 +10,14 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var movieId = '';
 
+$("#searchform").submit(function(e) {
+  e.preventDefault();
+});
+
+$("#reviewform").submit(function(e) {
+  e.preventDefault();
+});
+
 function checkReviews(movieId) {
 	$(".table > tbody").empty();
 	console.log('looking for movieid = ' + movieId);
